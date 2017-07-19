@@ -1,5 +1,5 @@
 /*rollbar.js v1.0.1 http://www.stite.net  2017-04-14*/
-(function(window){
+(function(global){
   var RollBar,rollStyle,rChildStyle;
   RollBar = function(data){
 
@@ -334,6 +334,8 @@
     };
   }
 
-  window.RollBar = RollBar;
+  if (typeof module !== 'undefined' && module.exports) module.exports = RollBar;
+  if (typeof define === 'function') define(function() { return RollBar; });
+  global.RollBar = RollBar;
 
 })(window);
