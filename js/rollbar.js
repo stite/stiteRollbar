@@ -334,8 +334,9 @@
     };
   }
 
-  if (typeof module !== 'undefined' && module.exports) module.exports = RollBar;
   if (typeof define === 'function') define(function() { return RollBar; });
+  if (typeof module !== 'undefined' && module.exports) module.exports = RollBar;
+  
   global.RollBar = RollBar;
 
 })(window);
