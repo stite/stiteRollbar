@@ -1,0 +1,138 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <title>rollbar.js</title>
+    <style type="text/css">
+        @charset "utf-8";body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,fieldset,legend,input,textarea,select{margin:0;padding:0}body{font:12px "宋体","Arial Narrow",HELVETICA;-webkit-text-size-adjust:100%;line-height:25px;font-family:"Microsoft YaHei"}a{color:#333;text-decoration:none}a:hover{text-decoration:underline}ul,li{list-style:none;margin:0;padding:0}img{border:0;vertical-align:middle;outline:none}body{background:url(../img/bg.jpg) center top no-repeat #e27d69}.main{width:1500px;margin:20px auto 0 auto}.head{width:100%;overflow:hidden}.center{width:1500px;margin:0 auto}.top{overflow:hidden;line-height:50px;font-size:14px;color:#fff}.top a{color:#fff;margin:0 10px}.top a.down{float:right;background:#e66d7a;padding:0 15px;line-height:30px;border-radius:5px;margin-top:10px}.top a.down:hover{text-decoration:none;background:#cc606b}.logo{text-align:center;overflow:hidden;padding-top:150px}.dec{text-align:center;color:#fff;font-size:18px}.dec p{line-height:35px}.dec a{color:#fff;font-weight:bold}.down{overflow:hidden;max-width:500px;text-align:center;margin:60px auto}.down p{text-align:center;position:relative;margin:25px 0;border-radius:5px;overflow:hidden}.down p:before{content:"";width:100%;height:100%;background:#c94449;position:absolute;left:0;top:0}.down p a{color:#fff;position:relative;z-index:5;font-size:14px;line-height:40px}.copy{width:100%;position:absolute;left:0;bottom:0;text-align:center;color:#fff;line-height:40px}.copy a{color:#fff}.api_body{background:#2b2b2b}.api_m{background:#e6e6e6;overflow:hidden}.api_left{overflow:hidden;width:200px;float:left;background:#e6e6e6;padding:20px;position:relative}.api_left:before{content:"";width:25px;height:25px;background:#2b2b2b;position:absolute;left:-15px;top:-15px;z-index:10;transform:rotate(45deg)}.api_left h2{color:#2b2b2b}.api_left h2 span{font-size:14px;width:100%;display:inline-block;font-weight:normal}.api_left h3{color:#61b3e6;font-weight:bold;margin-top:20px}.api_left h3 a{font-size:18px;color:#61b3e6}.api_left ul{overflow:hidden; padding-top: 25px;}.api_left ul li{border-bottom:1px dashed #dadada;font-size:16px;line-height:35px}.api_left ul li a{padding-left:10px;display:block;background:url(../img/lnavi2a.png) left center no-repeat}.api_left a:hover{color: #00a2ca}.api_right{overflow:hidden;padding:20px;background:#fff}.api_right .api_logo{overflow:hidden}.api_right .api_logo p{font-size:14px;line-height:25px;padding-left:0px}.api_right .right_m{padding-left:20px;font-size:14px}.api_right .right_m .bt{font-weight:bold;font-size:24px;padding:15px 0}.api_right .right_m .bt:before{content:"·";padding-right:10px;font-size:20px}.api_right .right_m .m{font-size:14px}.l_fixed{position:fixed}.l_fixed:before{content:"";position:fixed}.r_p{margin-left:240px}@media only screen and (max-width:1400px){.main,.center{width:1200px}}@media only screen and (max-width:1200px){.main,.center{width:1000px}}@media only screen and (max-width:1024px){.main,.center{width:1000px}}
+        .lr{ overflow: hidden; }
+        .lr h3{ border-bottom: 1px solid #dfdfdf; font-size: 22px; padding-top: 10px; font-weight: bold; line-height: 35px;}
+        .lr table{ width: 100%; border-collapse: collapse;}
+        .lr thead{ background: #dfdfdf; font-weight: bold;}
+        .lr table td{ line-height: 30px; padding: 5px 15px; border:1px solid #dfdfdf;}
+        .lr table tbody tr:nth-child(2n){ background: #f5f5f5;}
+        .lr .red{ color: red; }
+    </style>
+    <meta name="keywords" content="rollbar,滚动条插件,滚动条模拟插件,滚动条模拟组件" />
+    <meta name="description" content="rollbar.js是一款用模拟滚动条的插件，可自定义颜色宽度滚动条的模拟插进，不基于任何库完全独立。" />
+</head>
+<body class="api_body">
+    <section class="main api_m">
+        <section class="api_left">
+            <h2>API说明</span></h2>
+            <ul>
+                <li><a href="#a1">使用</a></li>
+                <li><a href="#a2">参数</a></li>
+                <li><a href="#a3">方法</a></li>
+                <li><a href="demo.html" target="_blank">DEMO</a></li>
+                <li><a href="http://www.stite.net/rollbar/rollbar.min.js">下载</a></li>
+            </ul>
+        </section>
+        <section class="api_right r_p">
+            <div class="api_logo">
+                <h2 style="font-size: 36px; color: #00a2ca; line-height: 50px; font-weight: bold;">rollbar.js</h2>
+                <p>rollbar.js是一款用模拟滚动条的插件，可自定义颜色宽度滚动条的模拟插进，不基于任何库完全独立。</p>
+            </div>
+            <div class="lr" id="a1">
+                <h3>引用</h3>
+                <p><pre style="margin:15px 0;font:100 12px/18px monaco, andale mono, courier new;padding:10px 12px;border:#ccc 1px solid;border-left-width:4px;background-color:#fefefe;box-shadow:0 0 4px #eee;word-break:break-all;word-wrap:break-word;color:#444"><span style="color:#170">&lt;script</span> <span style="color:#00c">type</span>=<span style="color:#a11">"text/javascript"</span> <span style="color:#00c">src</span>=<span style="color:#a11">"js/rollbar.min.js"</span><span style="color:#170">&gt;</span><span style="color:#170">&lt;/script</span><span style="color:#170">&gt;</span></pre></p>
+                <p><a href="demo.html" target="_blank" style="color: #00a2ca; font-size: 18px; line-height: 30px; margin-top: 10px;">查看DEMO效果</a></p>
+                <h3>HTML代码</h3>
+                <p><pre style="margin:15px 0;font:100 12px/18px monaco, andale mono, courier new;padding:10px 12px;border:#ccc 1px solid;border-left-width:4px;background-color:#fefefe;box-shadow:0 0 4px #eee;word-break:break-all;word-wrap:break-word;color:#444"><span style="color:#170">&lt;div</span> <span style="color:#00c">class</span>=<span style="color:#a11">"content"</span> <span style="color:#00c">id</span>=<span style="color:#a11">"content"</span><span style="color:#170">&gt;</span><br>    <span style="color:#170">&lt;div</span> <span style="color:#00c">class</span>=<span style="color:#a11">"main"</span><span style="color:#170">&gt;</span><br>        <span style="color:#170">&lt;article</span><span style="color:#170">&gt;</span><br>            <span style="color:#170">&lt;div</span><span style="color:#170">&gt;</span><br>                <span style="color:#219">&amp;nbsp;</span> <span style="color:#219">&amp;nbsp;</span> <span style="color:#219">&amp;nbsp;</span> <span style="color:#219">&amp;nbsp;</span>生命里，一些缱绻，无论素净，还是喧哗，都已经被岁月赋予了清喜的味道，一些闲词，或清新，或淡雅，总会在某一个回眸的时刻醉了流年，濡湿了柔软的心，冥冥之中，我们沿着呼唤的风声，终于在堆满落花的秋里，再次重逢，念在天涯，心在咫尺，我相信，一米阳光，才是我们最好的距离。 <span style="color:#219">&amp;nbsp;</span><span style="color:#219">&amp;nbsp;</span><span style="color:#170">&lt;/div</span><span style="color:#170">&gt;</span><br>                .......<br>        <span style="color:#170">&lt;/article</span><span style="color:#170">&gt;</span><br>    <span style="color:#170">&lt;/div</span><span style="color:#170">&gt;</span><br><span style="color:#170">&lt;/div</span><span style="color:#170">&gt;</span></pre>
+                </p>
+                <h3>JS代码</h3>
+                <p>
+                    <pre style="margin:15px 0;font:100 12px/18px monaco, andale mono, courier new;padding:10px 12px;border:#ccc 1px solid;border-left-width:4px;background-color:#fefefe;box-shadow:0 0 4px #eee;word-break:break-all;word-wrap:break-word;color:#444"><span style="color:#708">var</span> <span style="color:#000">roll</span> =  <span style="color:#708">new</span> <span style="color:#000">RollBar</span>({<br>    <span style="color:#000">el</span>:<span style="color:#a11">"content"</span>,<br>    <span style="color:#000">width</span>: <span style="color:#a11">"3px"</span>,<br>    <span style="color:#000">bgColor</span>:<span style="color:#a11">"#d0d0d0"</span>,<br>    <span style="color:#000">colour</span>:<span style="color:#a11">"#000"</span><br>});</pre>
+                </p>
+                <h3>初始化说明</h3>
+                <p>
+                    <pre style="margin:15px 0;font:100 12px/18px monaco, andale mono, courier new;padding:10px 12px;border:#ccc 1px solid;border-left-width:4px;background-color:#fefefe;box-shadow:0 0 4px #eee;word-break:break-all;word-wrap:break-word;color:#444"><span style="color:#708">var</span> <span style="color:#000">roll2</span> =  <span style="color:#708">new</span> <span style="color:#000">RollBar</span>({<br>    <span style="color:#000">el</span>:<span style="color:#a11">"content2"</span>, <span style="color:#a50">// ID</span><br>    <span style="color:#000">width</span>: <span style="color:#a11">"15px"</span>, <span style="color:#a50">//滚动条宽度</span><br>    <span style="color:#000">bgColor</span>:<span style="color:#a11">"#d0d0d0"</span>, <span style="color:#a50">//滚动条背景颜色</span><br>    <span style="color:#000">bgShow</span>:<span style="color:#219">false</span>, <span style="color:#a50">//是否显示背景滚动条</span><br>    <span style="color:#000">colour</span>:<span style="color:#a11">"#000"</span>, <span style="color:#a50">//滚动条颜色</span><br>    <span style="color:#000">rollbarY</span> : <span style="color:#219">true</span>, <span style="color:#a50">//竖向滚动条是否显示</span><br>    <span style="color:#000">rollbarX</span> : <span style="color:#219">false</span>, <span style="color:#a50">//横向滚动条是否显示</span><br>    <span style="color:#000">callback</span>:<span style="color:#708">function</span>(<span style="color:#00f">ev</span>){ <br>        <span style="color:#a50">// 滚动条滚动时执行</span><br>    }<br>});</pre>
+                </p>
+                <h3 id="a2">参数</h3>
+                <p>
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <td>参数</td>
+                                <td>默认值</td>
+                                <td>说明</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>el</td>
+                                <td class="red">必填</td>
+                                <td>#ID的DMO，生成一个滚动条</td>
+                            </tr>
+                            <tr>
+                                <td>width</td>
+                                <td>5px</td>
+                                <td>滚动条的宽度。</td>
+                            </tr>
+                            <tr>
+                                <td>bgColor</td>
+                                <td>#d0d0d0</td>
+                                <td>滚动条的底部颜色。</td>
+                            </tr>
+                            <tr>
+                                <td>colour</td>
+                                <td>#999999</td>
+                                <td>滚动条颜色。</td>
+                            </tr>
+                            <tr>
+                                <td>bgShow</td>
+                                <td>false</td>
+                                <td>是否显示底部滚动条。</td>
+                            </tr>
+                            <tr>
+                                <td>rollbarY</td>
+                                <td>true</td>
+                                <td>是否显示坚向滚动条。</td>
+                            </tr>
+                            <tr>
+                                <td>rollbarX</td>
+                                <td>false</td>
+                                <td>是否显示横向滚动条。</td>
+                            </tr>
+                            <tr>
+                                <td>callback</td>
+                                <td>-</td>
+                                <td>滚动时执行的回调。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </p>
+                <h3 id="a3">方法</h3>
+                <p><b>scrollTo(x,y,callback)</b>滚动至哪个位置</p>
+                <p><pre style="margin:5px 0;font:100 12px/18px monaco, andale mono, courier new;padding:10px 12px;border:#ccc 1px solid;border-left-width:4px;background-color:#fefefe;box-shadow:0 0 4px #eee;word-break:break-all;word-wrap:break-word;color:#444"><span style="color:#000">roll</span>.<span style="color:#000">scrollTo</span>(<span style="color:#164">0</span>,<span style="color:#164">100</span>,<span style="color:#708">function</span>(){<br>    <span style="color:#a50">//执行回调</span><br>})</pre></p>
+                <p><b>refresh(callback)</b>刷新DMO，当DOM里面有元素变更时可刷新。</p>
+                <p><pre style="margin:5px 0;font:100 12px/18px monaco, andale mono, courier new;padding:10px 12px;border:#ccc 1px solid;border-left-width:4px;background-color:#fefefe;box-shadow:0 0 4px #eee;word-break:break-all;word-wrap:break-word;color:#444"><span style="color:#000">roll</span>.<span style="color:#000">refresh</span>(<span style="color:#708">function</span>(){<br>    <span style="color:#a50">//回调</span><br>})</pre></p>
+                <p>&nbsp;</p>
+            </div>
+            <div>
+                <!-- UY BEGIN -->
+                <div id="uyan_frame"></div>
+                <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1618590"></script>
+                <!-- UY END -->
+            </div>
+        </section>
+    </section>
+    <script type="text/javascript" src="http://www.stite.net/stite.touch/js/zepto.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var lt = $('.api_left').offset().top;
+            $(document).scroll(function(){
+                console.log($('body').scrollTop())
+                if($('body').scrollTop()>lt){
+                    $('.api_left').addClass('l_fixed');
+                }else{
+                    $('.api_left').removeClass('l_fixed');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
